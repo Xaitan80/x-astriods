@@ -3,6 +3,7 @@ from constants import *
 from circleshape import *
 from asteroid import *
 from asteroidfield import *
+from shot import *
 
 
 class Player(CircleShape):
@@ -47,6 +48,18 @@ class Player(CircleShape):
         if keys[pygame.K_s]:
 
             self.move(-dt)
-            # ?
+        
+        if  keys[pygame.K_SPACE]:
+            #print("Spacebar pressed")
 
+            self.shoot()
+            # ?
+    def shoot(self):
+        forward = pygame.Vector2(0, 1).rotate(self.rotation)
+        #forward = pygame.Vector2(0, 1)
+        #forward.rotate(self.rotation)
+        shoot_speed = forward * PLAYER_SHOOT_SPEED
+        shot = Shot(self.position.x, self.position.y)
+        shot.velocity = shoot_speed
+        
     
